@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body{
+            text-align:center;
+            background-color:#E4B1F0;
+        }
+        h1{
+            color:#433878;
+            margin-top:40px;
+            box-shadow: 0 0 2em rgb(67, 56, 120, 0.4);
+            display: inline-block;
+            padding:10px 20px 10px 20px;
+            border-radius:20px;
+        }
+        
+        div#container{
+            background-color:#FFE1FF;
+            height: 440px;
+            width: 350px;
+            border: 2px solid #433878;
+            position:relative;
+            left:500px;
+            top:20px;
+            text-align:center;
+            box-shadow: 0 0 2em rgb(67, 56, 120, 0.6);
+            border-radius:15px;
+        }
+        #name{
+            margin: 80px 20px 20px 10px;
+            border: none;
+            height:22px;
+            border-radius:5px;
+        }
+        #email{
+            margin: 20px 20px 20px 10px;
+            border: none;
+            height:22px;
+            border-radius:5px;
+        }
+        #password{
+            margin: 20px 40px 20px 10px;
+            border: none;
+            height:22px;
+            border-radius:5px;
+        }
+        #dob{
+            margin: 20px 120px 20px 10px;
+            border: none;
+            height:22px;
+            border-radius:5px;
+        }
+        #submit{
+            margin: 20px 0px 20px 10px;
+        }
+        div#user-entries{
+            text-align:center;
+            margin: 20px 0 0 400px;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Registration form</h1>
+    <div id="container">
+        <form id="userForm" >
+            <label for="name">Name</label>
+            <input required type="text" id="name" name="name" placeholder="Enter your name">
+            <br>
+            <label for="email">Email</label>
+            <input required type="email" id="email" name="email" >
+            <br>
+            <label for="password">Password</label>
+            <input required minlength="4" maxlength="8" type="password" id="password" name="password">
+            <br>
+            <label for="dob">Date of birth</label>
+            <input required type="date" id="dob" name="dob">
+            <span id="error-message" style="color: red;"></span><br>
+            <br>
+            <label for="accepTerms">Accept Terms & Conditions</label>
+            <input type="checkbox" id="accepTerms" name="acceptTerms">
+            <br>
+            <button type="submit" id="submit" name="submit"> Submit </button>
+        </form>
+    </div>
+
+    <h3 style="margin-top:50px">Entries</h3>
+    <div id="user-entries"></div>
+
+    <script src="index.js"> </script>
+
+    </body>
+</html>
