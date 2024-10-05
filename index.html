@@ -67,12 +67,12 @@
 <body>
     <h1>Registration form</h1>
     <div id="container">
-        <form id="userForm" >
+        <form id="userForm">
             <label for="name">Name</label>
             <input required type="text" id="name" name="name" placeholder="Enter your name">
             <br>
             <label for="email">Email</label>
-            <input required type="email" id="email" name="email" >
+            <input required type="email" id="email" name="email">
             <br>
             <label for="password">Password</label>
             <input required minlength="4" maxlength="8" type="password" id="password" name="password">
@@ -81,17 +81,16 @@
             <input required type="date" id="dob" name="dob">
             <span id="error-message" style="color: red;"></span><br>
             <br>
-            <label for="accepTerms">Accept Terms & Conditions</label>
-            <input type="checkbox" id="accepTerms" name="acceptTerms">
+            <label for="acceptTerms">Accept Terms & Conditions</label>
+            <input type="checkbox" id="acceptTerms" name="acceptTerms" >
             <br>
-            <button type="submit" id="submit" name="submit"> Submit </button>
+            <button type="submit" id="submit" name="submit">Submit</button>
         </form>
     </div>
 
     <h3 style="margin-top:50px">Entries</h3>
     <div id="user-entries"></div>
 
-    <script src="index.js"> </script>
-
-    </body>
+    <script src="test.js"></script>
+</body>
 </html>
