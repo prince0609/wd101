@@ -1,54 +1,49 @@
 let email = document.querySelector("#email");
-email.addEventListener("input", (e) => validate(email));
-
 let submit = document.querySelector("#submit");
-submit.addEventListener("click", (event) => validate(email, event));
+let dob = document.getElementById("dob");
+let userForm = document.getElementById("userForm");
+
+// Email validation
+email.addEventListener("input", (e) => validate(email, e));
+submit.addEventListener("click", (e) => validate(email, e));
 
 function validate(ele, event) {
     if (ele.validity.typeMismatch) {
         ele.setCustomValidity("Email is not valid");
         ele.reportValidity();
-        event.preventDefault();  // This prevents form submission if the email is invalid
+        event.preventDefault();
     } else {
         ele.setCustomValidity('');
     }
 }
 
-
-
+// Age validation
 dob.addEventListener("input", (event) => valid(dob));
 function valid(ele) {
     let str = ele.value;
-    let dobYear = +str.slice(0, 4);   // + is there for converting string to number
-    let date = new Date();
-    let currentYr = date.getFullYear();
+    let dobYear = +str.slice(0, 4);
+    let currentYr = new Date().getFullYear();
     let age = currentYr - dobYear;
 
     let errorMessage = document.getElementById("error-message");
-    if (age > 18 && age < 55) {
-        errorMessage.textContent = "";
+    if (age < 18 || age > 55) {
+        errorMessage.textContent = "Age must be between 18 and 55.";
         submit.disabled = true;
     } else {
-        errorMessage.textContent = "Age must be between 18 and 55.";
+        errorMessage.textContent = "";
         submit.disabled = false;
     }
 }
 
-
-let userForm = document.getElementById("userForm");
-
+// Retrieve entries from localStorage
 const retrieveEntries = () => {
     let entries = localStorage.getItem("user-entries");
-    if (entries) {
-        entries = JSON.parse(entries);
-    } else {
-        entries = [];
-    }
-    return entries;
-}
+    return entries ? JSON.parse(entries) : [];
+};
 
 let userEntries = retrieveEntries();
 
+// Display entries in the table
 const displayEntries = () => {
     const entries = retrieveEntries();
 
@@ -57,32 +52,26 @@ const displayEntries = () => {
         const emailCell = `<td> ${entry.email}</td>`;
         const passwordCell = `<td> ${entry.password}</td>`;
         const dobCell = `<td> ${entry.dob} </td>`;
-        const accepTermsCell = `<td> ${entry.accepTerms} </td>`;
-
-        const row = `<tr> ${nameCell} ${emailCell} ${passwordCell} ${dobCell} ${accepTermsCell} </tr>`;
-
-        return row;
+        const accepTermsCell = `<td> ${entry.accepTerms ? 'Yes' : 'No'} </td>`;
+        return `<tr> ${nameCell} ${emailCell} ${passwordCell} ${dobCell} ${accepTermsCell} </tr>`;
     }).join("\n");
 
-
-
     const table = `
-        <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Password</th>
-                    <th>DOB</th>
-                    <th>Accepted Terms?</th>
-                </tr>
-                ${tableEntries}
-        <table>`;
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>DOB</th>
+            <th>Accepted Terms?</th>
+        </tr>
+        ${tableEntries}
+    </table>`;
 
-    let details = document.getElementById("user-entries");
-    details.innerHTML = table;
+    document.getElementById("user-entries").innerHTML = table;
+};
 
-}
-
+// Save form data to localStorage
 const saveUserForm = (event) => {
     event.preventDefault();
     const name = document.getElementById("name").value;
@@ -91,23 +80,14 @@ const saveUserForm = (event) => {
     const dob = document.getElementById("dob").value;
     const accepTerms = document.getElementById("accepTerms").checked;
 
-    const entry = {
-        name,
-        email,
-        password,
-        dob,
-        accepTerms
-    };
-
+    const entry = { name, email, password, dob, accepTerms };
     userEntries.push(entry);
-
     localStorage.setItem("user-entries", JSON.stringify(userEntries));
 
-    displayEntries();
-    userForm.reset();
-}
+    displayEntries(); // Update the table after each submission
+    userForm.reset(); // Clear the form fields after submission
+};
 
+// Add event listener for form submission
 userForm.addEventListener("submit", saveUserForm);
-
-displayEntries();
-
+displayEntries(); // Display entries on page load
