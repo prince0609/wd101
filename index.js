@@ -62,7 +62,7 @@ const displayEntries = () => {
             <th>Name</th>
             <th>Email</th>
             <th>Password</th>
-            <th>DOB</th>
+            <th>Dob</th>
             <th>Accepted Terms?</th>
         </tr>
         ${tableEntries}
